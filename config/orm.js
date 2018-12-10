@@ -2,9 +2,9 @@ const { connection: db } = require("./connection.js");
 
 db.connect( (error) => {
   if (error) {
-    return console.log(`Connection error: ${error.code || "(no code)"}: ${error.sqlMessage || "(no SQL message)"}`);
+    return console.log("Database connection error:\n", error);
   }
-  console.log("Connected to db as id " + db.threadId);
+  console.log(`Connected to database as id ${db.threadId}`);
 });
 
 module.exports = {
@@ -12,7 +12,7 @@ module.exports = {
     from = table || from;
     
     if (!from) {
-      throw "ORM/selectAll needs a 'table' (or 'from') required."
+      throw "ORM/selectAll requires a 'table' (or 'from') property."
     }
 
     select = columns || select;
