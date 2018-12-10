@@ -4,15 +4,19 @@ const orm = require("./../config/orm");
 
 const burgerModel = {
   insertOne() {
-    console.log("model-burger-insertOne");
+    console.log("\t\t@ model/burger/insertOne");
     return orm.insertOne();
   },
+  
   selectAll() {
-    console.log("model-burger-selectAll");
-    return orm.selectAll();
+    console.log("\t\t@ model/burger/selectAll");
+
+    return orm.selectAll({table: "burgers"})
+    .then( queryResults => queryResults[0]);
   },
+
   updateOne() {
-    console.log("model-burger-updateOne");
+    console.log("\t\t@ model/burger/updateOne");
     return orm.updateOne();
   }
 };

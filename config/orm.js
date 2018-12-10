@@ -1,19 +1,34 @@
-const { connection: dbConn } = require("./connection.js");
+const { connection: db } = require("./connection.js");
 
-dbConn.connect( (error) => {
+db.connect( (error) => {
   if (error) {
     return console.log(`Connection error: ${error.code || "(no code)"}: ${error.sqlMessage || "(no SQL message)"}`);
   }
+  console.log("Connected to db as id " + db.threadId);
 });
 
 module.exports = {
-  selectAll() {
-    return console.log("orm-selectAll");
+  selectAll({table, from, columns, select='*'}={}) {
+    from = table || from;
+    
+    if (!from) {
+      throw "ORM/selectAll needs a 'table' (or 'from') required."
+    }
+
+    select = columns || select;
+    console.log("\t\t@ orm-selectAll:", from, select);
+    
+    return db.promise().query({
+      sql: "SELECT ?? FROM ??",
+      values: [select, from]
+    });
   },
-  insertOne() {
+
+  async insertOne() {
     return console.log("orm-insertOne");
   },
-  updateOne() {
+
+  async updateOne() {
     return console.log("orm-updateOne");
   }
 };

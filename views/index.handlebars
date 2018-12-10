@@ -3,6 +3,7 @@
     line-height: 3rem;
     text-align: center;
   }
+
 </style>
 
 <div class="container bg-red">
@@ -20,8 +21,31 @@
       </form>
     </div>
   </div>
-  <div class="row justify-content-between text-center bg-violet">
-    <div class="col">Ordered Burgers</div>
-    <div class="col">Devoured Burgers</div>
+
+  <div class="row justify-content-between bg-violet">
+    <div class="col bg-bluvlt">
+      <h4 class="text-center">Ordered</h4>
+      <ul>
+        {{#each ordered}}
+          <li>
+            <p>{{id}} <i>{{burger_name}}</i></p>
+          </li>
+        {{else}}
+          <p>(None) Try adding an Order!</p>
+        {{/each}}
+      </ul>
+    </div>
+    <div class="col bg-orgred">
+      <h4 class="text-center">Devoured</h4>
+      <ul>
+        {{#each devoured}}
+          <li>
+            <p>{{id}} <i>{{burger_name}}</i></p>
+          </li>
+        {{else}}
+          <p>(None) Eat a juicy Burger!</p>
+        {{/each}}
+      </ul>
+    </div>
   </div>
 </div>

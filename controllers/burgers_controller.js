@@ -1,13 +1,23 @@
 const router = require("express").Router();
+const lo_part = require('lodash/partition');
 
 const burgerMdl = require("./../models/burger");
 // console.log("\t\t@controllers/burgers, burgerMdl: ");
 // console.log(burgerMdl && Object.keys(burgerMdl));
 
 router.get("/", function(req, res) {
-  console.log('\t\t@ctrl/burger router GET, @ "/"');
-  burgerMdl.selectAll();
-  return res.render("index");
+  console.log('\t\t@ ctrl/burger router GET, @ "/"');
+
+  burgerMdl.selectAll()
+  .then( burgerResults => {
+    // console.log("then results\n", burgerResults);
+    [devoured, ordered] = lo_part(burgerResults, 'devoured');
+    return res.render("index", { ordered, devoured });
+  })
+  .catch( (error) => {
+    console.log("ctrl/burgers/get@\"/\"/selectAll ERROR:\n", error);
+    return res.render("index"); // still render
+  });
 });
 
 router.post("/api/", function(req, res) {
