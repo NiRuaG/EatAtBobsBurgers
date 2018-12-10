@@ -1,4 +1,3 @@
 node_modules
+\!local_only
 .env
-MySQLHerokuDeploymentProcess.pdf
-homework_instructions.md
