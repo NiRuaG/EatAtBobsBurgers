@@ -3,7 +3,10 @@
     line-height: 3rem;
     text-align: center;
   }
-
+  img.icon {
+    max-height: 5vh;
+    max-width: 5vw;
+  }
 </style>
 
 <div class="container bg-red">
@@ -24,11 +27,21 @@
 
   <div class="row justify-content-between bg-violet">
     <div class="col bg-bluvlt">
-      <h4 class="text-center">Ordered</h4>
+      <div class="row justify-content-center">
+        <img class="col-auto icon" src="/assets/images/ordered.png">
+        <h4 class="col-auto text-center">
+          Ordered
+        </h4>
+        <img class="col-auto icon" src="/assets/images/ordered.png">
+      </div>
+
       <ul>
         {{#each ordered}}
-          <li>
-            <p>{{id}} <i>{{burger_name}}</i></p>
+          <li class="row justify-content-center">
+            <p class="col-6 align-self-center mb-0">{{id}} <i>{{burger_name}}</i></p>
+            <a href="#" class="col-auto bg-red">
+              <img class="icon" src="/assets/images/eatburger2.png">
+            </a>
           </li>
         {{else}}
           <p>(None) Try adding an Order!</p>
