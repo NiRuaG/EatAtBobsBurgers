@@ -24,11 +24,11 @@ module.exports = {
     });
   },
 
-  async insertOne() {
+  insertOne() {
     return console.log("orm-insertOne");
   },
 
-  async updateOne() {
+  updateOne() {
     return console.log("orm-updateOne");
   }
 };
