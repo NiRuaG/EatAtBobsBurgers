@@ -9,26 +9,32 @@ router.get("/", function(req, res) {
   console.log('\t\t@ ctrl/burger router GET, @ "/"');
 
   burgerMdl.selectAll()
-  .then( burgerResults => {
-    // console.log("then results\n", burgerResults);
-    [devoured, ordered] = lo_part(burgerResults, 'devoured');
+  .then( selectAllResults => {
+    // console.log("selectAll.then results\n", selectAllResults);
+    [devoured, ordered] = lo_part(selectAllResults, 'devoured');
     return res.render("index", { ordered, devoured });
   })
-  .catch( (error) => {
+  .catch( error => {
     console.log("ctrl/burgers/get@\"/\"/selectAll ERROR:\n", error);
     return res.render("index"); // still render
   });
 });
 
-router.post("/api/", function(req, res) {
-  console.log('\t\t@ctrl/burger router POST, @ "/api"');
-  burgerMdl.insertOne();
-  return res.status(200).end();
+router.post("/api/order", function(req, res) {
+  console.log("\t\t@ctrl/burger router POST, @ '/api/order'");
+  burgerMdl.insertOne()
+  .then( insertResults => {
+    console.log("insertResults.then results\n", insertResults);
+    return res.status(200).end();
+  })
+  .catch( error => {
+    return res.status(500).end();
+  });
 });
 
-router.put("/api/put", function(req, res) {
-  console.log('\t\t@ctrl/burger router PUT, @ "/api/put"');
-  burgerMdl.updateOne();
+router.put("/api/order", function(req, res) {
+  console.log('\t\t@ctrl/burger router PUT, @ "/api/order"');
+  // burgerMdl.updateOne();
   return res.status(200).end();
 });
 
