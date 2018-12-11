@@ -9,30 +9,30 @@ router.get('/', function(req, res) {
   console.log('\t\t@ ctrl/burger GET on /');
 
   burgerMdl.all()
-  .then( selectAllResults => {
-    // console.log("selectAll.then results\n", selectAllResults);
-    [devoured, ordered] = lo_part(selectAllResults, 'devoured');
-    return res.render("index", { ordered, devoured });
-  })
-  .catch( error => {
-    console.log("ctrl/burgers GET on /, all ERROR:\n", error);
-    return res.render("index"); // still render
-  });
+    .then( selectAllResults => {
+      // console.log("selectAll.then results\n", selectAllResults);
+      [devoured, ordered] = lo_part(selectAllResults, 'devoured');
+      return res.render("index", { ordered, devoured });
+    })
+    .catch( error => {
+      console.log("ctrl/burgers GET on /, all ERROR:\n", error);
+      return res.render("index"); // still render
+    });
 });
 
 
 router.post('/api/order', function({body}={}, res) {
   console.log('\t\t@ ctrl/burger POST on /api/order\n\t\t\tw/body:', body);
+  if (!body) {
+    return res.status(500).end();
+  }
 
   burgerMdl.orderOne(body)
-  .then( orderResults => {
-    console.log("orderOne.then results\n", orderResults);
-    return res.status(200).end();
-  })
-  .catch( error => {
-    console.log("ctrl/burgers POST on /api/order, ERROR:\n", error);
-    return res.status(500).end();
-  });
+    .then( _ => res.status(200).end() )
+    .catch( error => {
+      console.log("ctrl/burgers POST on /api/order,   ERROR:\n", error);
+      return res.status(500).end();
+    });
 });
 
 

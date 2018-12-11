@@ -10,18 +10,16 @@ const burgerModel = {
 
     console.log("\t\t@ model/burger.orderOne");
     
-    return orm.insertOne({into: "burgers", burger})
-    .then( insertResults => { 
-      console.log("model/burger.orderOne, insertResults:\n", insertResults);
-      return insertResults;
-    });
+    return orm
+      .insertOne({into: "burgers", burger});
   },
   
   all() {
     console.log("\t\t@ model/burger/selectAll");
 
-    return orm.selectAll({table: "burgers"})
-    .then( queryResults => queryResults[0]);
+    return orm
+      .selectAll({table: "burgers"})
+        .then( queryResults => queryResults[0] );
   },
 
   updateOne() {

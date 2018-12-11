@@ -25,24 +25,24 @@ module.exports = {
     });
   },
 
-  insertOne({table, into, ...values}={}) {
+  insertOne({table, into, ...set}={}) {
 
     into = table || into;
     if (!into) {
       throw "ORM.insertOne requires a 'table' (or 'into') property.";
     }
     
-    values = Object.values(values)[0];
-    if (!values) {
-      throw "ORM.insertOne requires a passed in object for its 'values'.";
+    set = Object.values(set)[0]; // [0] because it should only be one object passed
+    if (!set) {
+      throw "ORM.insertOne requires a passed in object for its set 'values'.";
     }
 
-    console.log("\t\t@ orm.insertOne:", into, values);
+    console.log("\t\t@ orm.insertOne:", into, set);
 
     return db.promise().query({
-      
-    })
-    return new Promise( (res,rej) => res(123));
+      sql: "INSERT INTO ?? SET ?", //! this specific to a mysql syntax, otherwise will have to do INSERT INTO .. VALUES ..
+      values: [into, set]
+    });
   },
 
   updateOne() {

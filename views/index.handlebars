@@ -4,15 +4,21 @@
     text-align: center;
   }
   img.icon {
-    max-height: 5vh;
-    max-width: 5vw;
+    width: auto;
+    max-height: 2rem;
+  }
+  img.banner {
+    max-height: 15rem;
+  }
+  .d-flex-nowrap {
+    flex-wrap: nowrap;
   }
 </style>
 
-<div class="container bg-red">
+<div class="container-fluid bg-red">
   <div class="row bg-orange">
     <div class="mx-auto col-auto text-center bg-yellow">
-      <img src="http://fillmurray.com/200/200">
+      <img class="banner" src="/assets/images/Gene_Belcher.png">
       <p>Eat at Bob's Burgers!</p>
     </div>
   </div>
@@ -27,7 +33,7 @@
 
   <div class="row justify-content-between bg-violet">
     <div class="col bg-bluvlt">
-      <div class="row justify-content-center">
+      <div class="row justify-content-center d-flex-nowrap">
         <img class="col-auto icon" src="/assets/images/ordered.png">
         <h4 class="col-auto text-center">
           Ordered
@@ -38,7 +44,7 @@
       <ul>
         {{#each ordered}}
           <li class="row justify-content-center">
-            <p class="col-6 align-self-center mb-0">{{id}} <i>{{burger_name}}</i></p>
+            <p class="col-6 align-self-center mb-0">{{id}}. <i>{{burger_name}}</i></p>
             <a href="#" class="col-auto bg-red">
               <img class="icon" src="/assets/images/eatburger2.png">
             </a>
