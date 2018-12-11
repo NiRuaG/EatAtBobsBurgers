@@ -9,14 +9,15 @@ db.connect( (error) => {
 
 module.exports = {
   selectAll({table, from, columns, select='*'}={}) {
+
     from = table || from;
-    
     if (!from) {
-      throw "ORM/selectAll requires a 'table' (or 'from') property."
+      throw "ORM.selectAll requires a 'table' (or 'from') property."
     }
 
     select = columns || select;
-    console.log("\t\t@ orm-selectAll:", from, select);
+    
+    console.log("\t\t@ orm.selectAll:", from, select);
     
     return db.promise().query({
       sql: "SELECT ?? FROM ??",
@@ -24,8 +25,24 @@ module.exports = {
     });
   },
 
-  insertOne() {
-    return console.log("orm-insertOne");
+  insertOne({table, into, ...values}={}) {
+
+    into = table || into;
+    if (!into) {
+      throw "ORM.insertOne requires a 'table' (or 'into') property.";
+    }
+    
+    values = Object.values(values)[0];
+    if (!values) {
+      throw "ORM.insertOne requires a passed in object for its 'values'.";
+    }
+
+    console.log("\t\t@ orm.insertOne:", into, values);
+
+    return db.promise().query({
+      
+    })
+    return new Promise( (res,rej) => res(123));
   },
 
   updateOne() {
