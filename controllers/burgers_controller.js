@@ -36,8 +36,8 @@ router.post('/api/order', function({body}={}, res) {
 });
 
 
-router.put("/api/order", function(req, res) {
-  console.log('\t\t@ctrl/burger router PUT, @ "/api/order"');
+router.put("/api/devour/:id", function({params}={}, res) {
+  console.log('\t\t@ ctrl/burger PUT on /api/devour\n\t\t\tw/id:', params.id);
   // burgerMdl.updateOne();
   return res.status(200).end();
 });

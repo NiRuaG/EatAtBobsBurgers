@@ -4,7 +4,11 @@ $(document).ready(() => {
   const $orderForm  = $("#order_form" );
   const $orderInput = $("#order_input");
 
-  $orderForm.submit(submitEvent => {
+  const devourSELECT = "button.devour";
+
+  $orderInput.focus();
+  
+  $orderForm.submit(submitEvent => { // care -- don't need 'this', so we can fat-arrow
     submitEvent.preventDefault();
     // console.log("order form submit:\n", submitEvent);
     // console.log(Object.keys(submitEvent));
@@ -21,6 +25,21 @@ $(document).ready(() => {
       })
       .catch(error => {
         console.log("POST ERROR:\n", error);
+      });
+  });
+
+  $(document).on("click", devourSELECT, function(clickEvent) {
+    console.log("clickEvent!", clickEvent, $(this).data("id"));
+
+    $.ajax({
+      method: "PUT",
+      url: "/api/devour/" + $(this).data("id")
+    })
+      .then(results => {
+        console.log("DELETE results:\n", results);
+      })
+      .catch(error => {
+        console.log("DELETE Error:\n", error);
       });
   });
 });

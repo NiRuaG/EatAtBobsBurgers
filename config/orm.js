@@ -17,7 +17,7 @@ module.exports = {
 
     select = columns || select;
     
-    console.log("\t\t@ orm.selectAll:", from, select);
+    console.log("\t\t@ orm.selectAll:", from, select, '\n');
     
     return db.promise().query({
       sql: "SELECT ?? FROM ??",
@@ -37,7 +37,7 @@ module.exports = {
       throw "ORM.insertOne requires a passed in object for its set 'values'.";
     }
 
-    console.log("\t\t@ orm.insertOne:", into, set);
+    console.log("\t\t@ orm.insertOne:", into, set, '\n');
 
     return db.promise().query({
       sql: "INSERT INTO ?? SET ?", //! this specific to a mysql syntax, otherwise will have to do INSERT INTO .. VALUES ..
@@ -46,6 +46,6 @@ module.exports = {
   },
 
   updateOne() {
-    return console.log("orm-updateOne");
+    return console.log("@ orm.updateOne\n");
   }
 };

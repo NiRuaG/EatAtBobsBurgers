@@ -13,6 +13,9 @@
   .d-flex-nowrap {
     flex-wrap: nowrap;
   }
+  button.devour {
+    background: transparent;
+  }
 </style>
 
 <div class="container-fluid bg-red">
@@ -45,9 +48,9 @@
         {{#each ordered}}
           <li class="row justify-content-center">
             <p class="col-6 align-self-center mb-0">{{id}}. <i>{{burger_name}}</i></p>
-            <a href="#" class="col-auto bg-red">
+            <button class="btn col-auto devour" data-id="{{id}}">
               <img class="icon" src="/assets/images/eatburger2.png">
-            </a>
+            </button>
           </li>
         {{else}}
           <p>(None) Try adding an Order!</p>
