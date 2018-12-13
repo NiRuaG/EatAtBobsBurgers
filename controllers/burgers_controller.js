@@ -6,7 +6,7 @@ const burgerMdl = require("./../models/burger");
 // console.log(burgerMdl && Object.keys(burgerMdl));
 
 router.get('/', function(req, res) {
-  console.log('\t\t@ ctrl/burger GET on /');
+  // console.log('\t\t@ ctrl/burger GET on /');
 
   burgerMdl.all()
     .then( selectAllResults => {
@@ -15,14 +15,14 @@ router.get('/', function(req, res) {
       return res.render("index", { ordered, devoured });
     })
     .catch( error => {
-      console.log("ctrl/burgers GET on /, all ERROR:\n", error);
+      console.log("ctrl/burgers GET on /, all() ERROR:\n", error);
       return res.render("index"); // still render
     });
 });
 
 
 router.post('/api/order', function({body}={}, res) {
-  console.log('\t\t@ ctrl/burger POST on /api/order\n\t\t\tw/body:', body);
+  // console.log('\t\t@ ctrl/burger POST on /api/order\n\t\t\tw/body:', body);
   if (!body) {
     return res.status(500).end();
   }
@@ -30,16 +30,23 @@ router.post('/api/order', function({body}={}, res) {
   burgerMdl.orderOne(body)
     .then( _ => res.status(200).end() )
     .catch( error => {
-      console.log("ctrl/burgers POST on /api/order,   ERROR:\n", error);
+      console.log("ctrl/burgers POST on /api/order, orderOne() ERROR:\n", error);
       return res.status(500).end();
     });
 });
 
 
-router.put("/api/devour/:id", function({params}={}, res) {
-  console.log('\t\t@ ctrl/burger PUT on /api/devour\n\t\t\tw/id:', params.id);
-  // burgerMdl.updateOne();
-  return res.status(200).end();
+router.put("/api/devour/:id", function({params: {id}}={}, res) {
+  // console.log('\t\t@ ctrl/burger PUT on /api/devour\n\t\t\tw/id:', id);
+  burgerMdl.updateOne({
+    id,
+    devoured: true
+  })
+  .then( _ => res.status(200).end() )
+  .catch( error => {
+    console.log("ctrl/burgers PUT on /api/devour/:id, updateOne() ERROR:\n", error);
+      return res.status(500).end();
+  });
 });
 
 

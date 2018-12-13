@@ -3,28 +3,37 @@ const orm = require("./../config/orm");
 // console.log(orm && Object.keys(orm));
 
 const burgerModel = {
-  orderOne(burger) {
+  // console.log("\t\t@ model/burger.selectAll");
+  all: () => 
+    orm
+      .selectAll({ table: "burgers" })
+        .then( queryResults => queryResults[0] )
+  ,
+
+  orderOne: burger => {
     if (!burger) {
       throw "Burger Model/orderOne requires a passed in 'burger' object.";
     }
 
-    console.log("\t\t@ model/burger.orderOne");
+    // console.log("\t\t@ model/burger.orderOne w/burger:", burger);
     
     return orm
-      .insertOne({into: "burgers", burger});
+      .insertOne({ into: "burgers", burger });
   },
-  
-  all() {
-    console.log("\t\t@ model/burger/selectAll");
+
+  updateOne: burger => {
+    if (!burger) {
+      throw "Burger Model.updateOne requires a passed in 'burger' object.";
+    }
+
+    // console.log("\t\t@ model/burger.updateOne w/burger:", burger);
 
     return orm
-      .selectAll({table: "burgers"})
-        .then( queryResults => queryResults[0] );
-  },
-
-  updateOne() {
-    console.log("\t\t@ model/burger/updateOne");
-    return orm.updateOne();
+      .updateOne({
+        table: "burgers",
+        where: { id: burger.id },
+        burger
+      });
   }
 };
 
