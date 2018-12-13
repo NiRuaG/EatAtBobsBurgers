@@ -32,7 +32,7 @@ module.exports = {
       throw "ORM.insertOne requires a 'table' (or 'into') property.";
     }
     
-    set = Object.values(set)[0]; // [0] because it should only be one object passed
+    set = Object.values(set)[0]; // [0] because it should only be the one object passed to INSERT
     if (!set) {
       throw "ORM.insertOne requires a passed in object for its set 'values'.";
     }
@@ -40,7 +40,7 @@ module.exports = {
     console.log("\t\t@ orm.insertOne:", into, set, '\n');
 
     return db.promise().query({
-      sql: "INSERT INTO ?? SET ?", //! this specific to a mysql syntax, otherwise will have to do INSERT INTO .. VALUES ..
+      sql: "INSERT INTO ?? SET ?", //! this syntax is specific to mysql (not part of the general SQL spec).  Would otherwise have to do 'INSERT INTO .. VALUES ..'
       values: [into, set]
     });
   },
