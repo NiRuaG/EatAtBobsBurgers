@@ -10,32 +10,51 @@
   img.banner {
     max-height: 15rem;
   }
+  img.banner-text {
+    max-height: 4rem;
+  }
   .d-flex-nowrap {
     flex-wrap: nowrap;
   }
   button.devour {
     background: transparent;
   }
+
+  .my-rounded-left {
+    border-bottom-left-radius: 1rem;
+    {{!-- border-top-left-radius: 0.5rem; --}}
+    {{!-- border-bottom-right-radius: 0.5rem; --}}
+  }
+  .my-rounded-right {
+    border-bottom-right-radius: 1rem;
+    {{!-- border-bottom-right-radius: 1rem; --}}
+    {{!-- border-top-right-radius: 0.5rem; --}}
+  } 
+  .my-rounded-top {
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+  }
 </style>
 
-<div class="container-fluid bg-red">
-  <div class="row bg-orange">
-    <div class="mx-auto col-auto text-center bg-yellow">
+<div class="container bg-warning {{!-- bg-red --}} my-rounded-top mt-2">
+  <div class="row {{!-- bg-orange --}}">
+    <div class="mx-auto col-auto text-center {{!-- bg-yellow --}}">
       <img class="banner" src="/assets/images/Gene_Belcher.png">
-      <p>Eat at Bob's Burgers!</p>
+      <p>Eat at <img class="banner-text" src="/assets/images/bobsburgers.png" alt="Bob's Burgers!"></p>
     </div>
   </div>
-  <div class="row justify-content-center bg-green">
-    <div class="col bg-blue">
-      <form id="order_form" class="row justify-content-center bg-indigo">
-        <input id="order_input" type="text" class="col-md-6"></input>
-        <button type="submit" class="btn btn-danger col-auto">Order</button>
+
+  <div class="row justify-content-center bg-dark py-1 {{!-- bg-green --}}">
+    <div class="col {{!-- bg-blue --}}">
+      <form id="order_form" class="row justify-content-center {{!-- bg-indigo --}}">
+        <input id="order_input" type="text" class="col-sm-6"></input>
+        <button type="submit" class="btn btn-success col-12 col-sm-auto offset-sm-1"><i class="fas fa-plus-circle"></i> Order</button>
       </form>
     </div>
   </div>
 
-  <div class="row justify-content-between bg-violet">
-    <div class="col bg-bluvlt">
+  <div class="row bg-dark justify-content-between {{!-- bg-violet --}}">
+    <div class="col bg-primary {{!-- bg-bluvlt --}} pt-2 mr-sm-1 my-rounded-left">
       <div class="row justify-content-center d-flex-nowrap">
         <img class="col-auto icon" src="/assets/images/ordered.png">
         <h4 class="col-auto text-center">
@@ -44,12 +63,12 @@
         <img class="col-auto icon" src="/assets/images/ordered.png">
       </div>
 
-      <ul>
+      <ul class="px-2">
         {{#each ordered}}
           <li class="row justify-content-center">
-            <p class="col-6 align-self-center mb-0">{{id}}. <i>{{burger_name}}</i></p>
+            <p class="col col-md-6 align-self-center mb-0">{{id}}. <i>{{burger_name}}</i></p>
             <button class="btn col-auto devour" data-id="{{id}}">
-              <img class="icon" src="/assets/images/eatburger2.png">
+              <img class="icon" src="/assets/images/eatburger2.png" alt="Devour!">
             </button>
           </li>
         {{else}}
@@ -57,12 +76,22 @@
         {{/each}}
       </ul>
     </div>
-    <div class="col bg-orgred">
-      <h4 class="text-center">Devoured</h4>
+
+    {{!-- <div class="col-md-1 bg-dark"></div> --}}
+
+    <div class="col bg-danger {{!-- bg-orgred --}} pt-2 ml-sm-1 my-rounded-right">
+      <div class="row justify-content-center d-flex-nowrap">
+        <img class="col-auto icon" src="/assets/images/devoured.png">
+        <h4 class="col-auto text-center">
+          Devoured
+        </h4>
+        <img class="col-auto icon" src="/assets/images/devoured.png">
+      </div>
+      
       <ul>
         {{#each devoured}}
-          <li>
-            <p>{{id}} <i>{{burger_name}}</i></p>
+          <li class="row justify-content-center">
+            <p class="col align-self-center mb-0">{{id}}. <i>{{burger_name}}</i></p>
           </li>
         {{else}}
           <p>(None) Eat a juicy Burger!</p>
