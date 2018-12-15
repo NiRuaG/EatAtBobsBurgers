@@ -10,8 +10,11 @@
   img.banner {
     max-height: 15rem;
   }
-  img.banner-text {
+  .banner-text img {
     max-height: 4rem;
+  }
+  .font-special {
+    font-family: 'Staatliches', cursive;
   }
   .d-flex-nowrap {
     flex-wrap: nowrap;
@@ -47,7 +50,9 @@
   <div class="row">
     <div class="mx-auto col-auto text-center">
       <img class="banner" src="/assets/images/Gene_Belcher.png">
-      <p>Eat at <img class="banner-text" src="/assets/images/bobsburgers.png" alt="Bob's Burgers!"></p>
+      <div class="banner-text font-special">
+        <h1>Eat at <img src="/assets/images/bobsburgers.png" alt="Bob's Burgers!"></h1>
+      </div>
     </div>
   </div>
 
@@ -65,7 +70,7 @@
       <div class="col-12 d-block col-sm bg-primary blue-burger-bottom pt-2">
         <div class="row justify-content-center d-flex-nowrap">
           <img class="col-auto icon" src="/assets/images/ordered.png">
-          <h4 class="col-auto text-center">
+          <h4 class="col-auto text-center font-special">
             Ordered
           </h4>
           <img class="col-auto icon" src="/assets/images/ordered.png">
@@ -88,7 +93,7 @@
     <div class="col-12 d-block col-sm bg-danger pt-2 red-burger-bottom">
       <div class="row justify-content-center d-flex-nowrap">
         <img class="col-auto icon" src="/assets/images/devoured.png">
-        <h4 class="col-auto text-center">
+        <h4 class="col-auto text-center font-special">
           Devoured
         </h4>
         <img class="col-auto icon" src="/assets/images/devoured.png">
