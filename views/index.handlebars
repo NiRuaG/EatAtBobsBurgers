@@ -20,66 +20,72 @@
     background: transparent;
   }
 
-  .my-rounded-left {
-    border-bottom-left-radius: 1rem;
-    {{!-- border-top-left-radius: 0.5rem; --}}
-    {{!-- border-bottom-right-radius: 0.5rem; --}}
+  @media (max-width: 575.98px) {
+    .blue-burger-bottom {
+      border-bottom-left-radius: 0rem !important;
+    }
+    .red-burger-bottom {
+      border-bottom-left-radius: 3rem 2rem;
+    }
   }
-  .my-rounded-right {
-    border-bottom-right-radius: 1rem;
-    {{!-- border-bottom-right-radius: 1rem; --}}
-    {{!-- border-top-right-radius: 0.5rem; --}}
-  } 
+
+  .blue-burger-bottom {
+    border-bottom-left-radius: 3rem 2rem;
+  }
+
+  .red-burger-bottom {
+    border-bottom-right-radius: 3rem 2rem;
+  }
+
   .my-rounded-top {
-    border-top-left-radius: 1rem;
-    border-top-right-radius: 1rem;
+    border-top-left-radius: 3rem 2rem;
+    border-top-right-radius: 3rem 2rem;
   }
 </style>
 
-<div class="container bg-warning {{!-- bg-red --}} my-rounded-top mt-2">
-  <div class="row {{!-- bg-orange --}}">
-    <div class="mx-auto col-auto text-center {{!-- bg-yellow --}}">
+<div class="container bg-warning my-rounded-top mt-2">
+  <div class="row">
+    <div class="mx-auto col-auto text-center">
       <img class="banner" src="/assets/images/Gene_Belcher.png">
       <p>Eat at <img class="banner-text" src="/assets/images/bobsburgers.png" alt="Bob's Burgers!"></p>
     </div>
   </div>
 
-  <div class="row justify-content-center bg-dark py-1 {{!-- bg-green --}}">
-    <div class="col {{!-- bg-blue --}}">
-      <form id="order_form" class="row justify-content-center {{!-- bg-indigo --}}">
+  <div class="row justify-content-center bg-success py-1">
+    <div class="col">
+      <form id="order_form" class="row justify-content-center">
         <input id="order_input" type="text" class="col-sm-6"></input>
         <button type="submit" class="btn btn-success col-12 col-sm-auto offset-sm-1"><i class="fas fa-plus-circle"></i> Order</button>
       </form>
     </div>
   </div>
 
-  <div class="row bg-dark justify-content-between {{!-- bg-violet --}}">
-    <div class="col bg-primary {{!-- bg-bluvlt --}} pt-2 mr-sm-1 my-rounded-left">
-      <div class="row justify-content-center d-flex-nowrap">
-        <img class="col-auto icon" src="/assets/images/ordered.png">
-        <h4 class="col-auto text-center">
-          Ordered
-        </h4>
-        <img class="col-auto icon" src="/assets/images/ordered.png">
-      </div>
+  <div class="row bg-dark justify-content-between">
 
-      <ul class="px-2">
-        {{#each ordered}}
+      <div class="col-12 d-block col-sm bg-primary blue-burger-bottom pt-2">
+        <div class="row justify-content-center d-flex-nowrap">
+          <img class="col-auto icon" src="/assets/images/ordered.png">
+          <h4 class="col-auto text-center">
+            Ordered
+          </h4>
+          <img class="col-auto icon" src="/assets/images/ordered.png">
+        </div>
+    
+        <ul class="px-3">
+          {{#each ordered}}
           <li class="row justify-content-center">
-            <p class="col col-md-6 align-self-center mb-0">{{id}}. <i>{{burger_name}}</i></p>
+            <p class="col col-md-9 col-lg-6 align-self-center mb-0">{{id}}. <i>{{burger_name}}</i></p>
             <button class="btn col-auto devour" data-id="{{id}}">
               <img class="icon" src="/assets/images/eatburger2.png" alt="Devour!">
             </button>
           </li>
-        {{else}}
+          {{else}}
           <p>(None) Try adding an Order!</p>
-        {{/each}}
-      </ul>
-    </div>
+          {{/each}}
+        </ul>
+      </div>
 
-    {{!-- <div class="col-md-1 bg-dark"></div> --}}
-
-    <div class="col bg-danger {{!-- bg-orgred --}} pt-2 ml-sm-1 my-rounded-right">
+    <div class="col-12 d-block col-sm bg-danger pt-2 red-burger-bottom">
       <div class="row justify-content-center d-flex-nowrap">
         <img class="col-auto icon" src="/assets/images/devoured.png">
         <h4 class="col-auto text-center">
@@ -88,7 +94,7 @@
         <img class="col-auto icon" src="/assets/images/devoured.png">
       </div>
       
-      <ul>
+      <ul class="px-3">
         {{#each devoured}}
           <li class="row justify-content-center">
             <p class="col align-self-center mb-0">{{id}}. <i>{{burger_name}}</i></p>
